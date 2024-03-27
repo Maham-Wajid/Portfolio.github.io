@@ -977,3 +977,8 @@ img.zoom {
     .modal-footer{
       display:none;  
     }
+
+
+.techs {
+  display: flex;
+}
