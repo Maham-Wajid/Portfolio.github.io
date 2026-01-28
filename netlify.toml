@@ -1,0 +1,67 @@
+# Netlify Configuration
+# This file configures the build and deployment for Netlify
+
+[build]
+  # Command to build the Next.js application
+  command = "npm run build"
+  
+  # Directory to publish (Next.js static export output)
+  publish = "out"
+  
+  # Node version to use
+  [build.environment]
+    NODE_VERSION = "20"
+
+# Redirects and rewrites
+[[redirects]]
+  # Redirect all routes to the single-page application
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Cache control for HTML (don't cache)
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    # Cache images for 1 year
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    # Cache JavaScript files for 1 year
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    # Cache CSS files for 1 year
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Production context configuration
+[context.production]
+  command = "npm run build"
+  publish = "out"
+
+# Deploy preview context (for pull requests)
+[context.deploy-preview]
+  command = "npm run build"
+  publish = "out"
+
+# Branch deploy context (for non-production branches)
+[context.branch-deploy]
+  command = "npm run build"
+  publish = "out"

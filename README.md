@@ -59,8 +59,9 @@ The development server will start at `http://localhost:3000`
 
 ### Tools & Services
 - **Form Handling**: Formspree
-- **Deployment**: GitHub Pages (Static Export)
+- **Deployment**: Netlify, GitHub Pages, or any static host
 - **Version Control**: Git & GitHub
+- **CI/CD**: GitHub Actions, Netlify Deploy
 
 ## 📦 Project Structure
 
@@ -106,7 +107,17 @@ Update this file to customize your portfolio content.
 
 ## 🚀 Deployment
 
-This portfolio is configured for GitHub Pages deployment:
+This portfolio supports multiple deployment platforms:
+
+### Netlify (Recommended)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Maham-Wajid/Portfolio.github.io)
+
+1. Click the button above or connect your repository to Netlify
+2. Netlify will automatically detect the configuration
+3. Your site will be live with automatic deployments on every push
+
+### GitHub Pages
 
 ```bash
 # Build for production
@@ -118,8 +129,17 @@ npm run build
 For GitHub Pages:
 1. Push changes to your repository
 2. Enable GitHub Pages in repository settings
-3. Set source to the branch with your build output
+3. Select "GitHub Actions" as the source
 4. Your site will be live at `https://[username].github.io/[repo-name]`
+
+### Other Platforms
+
+The site can be deployed to any static hosting service (Vercel, Cloudflare Pages, etc.):
+- Build command: `npm run build`
+- Publish directory: `out`
+- Node version: 20+
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
 ## 📄 License
 
