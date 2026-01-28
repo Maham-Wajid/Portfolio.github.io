@@ -1,20 +1,24 @@
-# Old Version Files
+# Old Version Files - ARCHIVED
 
-This directory contains the previous version (v1.0) of the portfolio website for reference.
+**Note:** The old static files have been moved to the `old-version/` directory to prevent deployment conflicts.
 
-## Preserved Files
+## Why Files Were Moved
 
-The following old files are preserved for reference but are no longer used:
+The presence of `index.html` in the repository root was causing web servers (including Netlify) to serve the old static interface instead of the new Next.js application. Moving these files resolves this issue.
 
-- `index.html` - Old main HTML file
-- `style.css` - Old custom styles
-- `bootstrap.css` - Old Bootstrap CSS
-- `main.js` - Old JavaScript file
-- `resume.html` - Old resume page
-- `webwork.html` - Old work showcase page
-- `sweetAlert.js` - Old alert library
-- `forms/` - Old form files
-- `assets/` - Old assets directory (images and videos)
+## Archived Files Location
+
+All old files are now in the `old-version/` directory:
+
+- `old-version/index.html` - Old main HTML file
+- `old-version/style.css` - Old custom styles
+- `old-version/bootstrap.css` - Old Bootstrap CSS
+- `old-version/main.js` - Old JavaScript file
+- `old-version/resume.html` - Old resume page
+- `old-version/webwork.html` - Old work showcase page
+- `old-version/sweetAlert.js` - Old alert library
+- `old-version/forms/` - Old form files
+- `assets/` - Old assets directory (images - kept for reference)
 
 ## Migration
 
@@ -27,21 +31,21 @@ All functionality from these files has been reimplemented in the new Next.js app
 
 ## Do Not Delete
 
-These files are kept for:
+These files are kept in the `old-version/` directory for:
 1. Historical reference
-2. Asset backup
+2. Asset backup (images in `assets/` directory)
 3. Potential data recovery
 4. Comparison with new version
 
-If you're confident with the new version, you can safely archive or delete these files.
+## New Version (v2.0)
 
-## New Version
-
-The current portfolio (v2.0) uses:
-- Next.js 15
+The current portfolio uses:
+- Next.js 16
 - React 19
 - TypeScript
 - Tailwind CSS
 - Modern component architecture
+
+**The new interface is now properly deployed!** The repository root no longer contains conflicting static HTML files.
 
 See the main README.md for details about the new version.
