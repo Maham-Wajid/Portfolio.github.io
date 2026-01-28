@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This portfolio is designed to be deployed on GitHub Pages using GitHub Actions for automatic deployment.
+This portfolio can be deployed on multiple platforms including GitHub Pages and Netlify with automatic deployment from your GitHub repository.
 
 ## Automatic Deployment (Recommended)
 
@@ -30,6 +30,68 @@ The repository includes a GitHub Actions workflow that automatically builds and 
 - Caches dependencies for faster builds
 - Deploys static output to GitHub Pages
 - Can be manually triggered from Actions tab
+
+## Netlify Deployment (Recommended)
+
+Netlify provides automatic deployments with continuous integration directly from your GitHub repository.
+
+### Quick Setup
+
+1. **Connect to Netlify**
+   - Sign up at [netlify.com](https://www.netlify.com) (use GitHub for easy connection)
+   - Click "Add new site" → "Import an existing project"
+   - Choose "GitHub" and authorize Netlify
+   - Select your `Portfolio.github.io` repository
+
+2. **Configure Build Settings**
+   - Netlify will automatically detect the `netlify.toml` configuration
+   - Build command: `npm run build`
+   - Publish directory: `out`
+   - Node version: 20 (configured in netlify.toml)
+
+3. **Deploy**
+   - Click "Deploy site"
+   - Netlify will build and deploy automatically
+   - Your site will be live at a custom Netlify URL (e.g., `your-site.netlify.app`)
+
+### Continuous Deployment
+
+Once connected, Netlify automatically:
+- Deploys on every push to your main branch
+- Creates deploy previews for pull requests
+- Provides instant rollback capability
+- Includes built-in HTTPS/SSL certificates
+- Offers custom domain support
+
+### Custom Domain Setup (Optional)
+
+1. In Netlify dashboard, go to "Domain settings"
+2. Click "Add custom domain"
+3. Follow the DNS configuration instructions
+4. Netlify provides automatic HTTPS for custom domains
+
+### Deploy Previews
+
+Netlify automatically creates deploy previews for:
+- Pull requests (test changes before merging)
+- Branch deploys (test feature branches)
+- Each preview gets a unique URL
+
+### Environment Variables (Optional)
+
+If you need environment variables:
+1. Go to Site settings → Environment variables
+2. Add variables (e.g., API keys for contact form)
+3. Variables are automatically available during build
+
+### Netlify Features
+
+- **Instant Cache Invalidation**: Changes go live immediately
+- **Global CDN**: Fast loading worldwide
+- **Automatic HTTPS**: Free SSL certificates
+- **Form Handling**: Built-in form processing (alternative to Formspree)
+- **Analytics**: Optional visitor analytics
+- **Functions**: Serverless functions if needed in future
 
 ## Manual Deployment
 
@@ -102,13 +164,15 @@ To use a custom domain:
 
 ## Troubleshooting
 
-### Build Fails
+### GitHub Pages Issues
+
+#### Build Fails
 
 - Check Node.js version (requires Node 18+)
 - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
 - Check for TypeScript errors: `npm run build`
 
-### 404 Errors on Pages
+#### 404 Errors on Pages
 
 - Ensure `trailingSlash: true` in next.config.ts
 - Verify all links use relative paths
@@ -125,6 +189,60 @@ To use a custom domain:
 - Ensure images are in the `public` directory
 - Use `/images/...` paths (not `./images/...`)
 - Check image file extensions match code
+
+### Netlify-Specific Issues
+
+#### Build Command Not Found
+
+- **Issue**: Netlify can't find `npm run build`
+- **Solution**: Check that `package.json` has the build script
+- **Verify**: `netlify.toml` specifies correct build command
+
+#### Publish Directory Error
+
+- **Issue**: "No publish directory found"
+- **Solution**: Ensure build completes successfully and creates `out` directory
+- **Check**: Verify `output: 'export'` is set in `next.config.ts`
+
+#### Build Timeout
+
+- **Issue**: Build takes too long and times out
+- **Solution**: 
+  - Check for memory issues in build logs
+  - Optimize dependencies
+  - Contact Netlify support for build time increase
+
+#### Environment Variables Not Working
+
+- **Issue**: Site builds but features don't work
+- **Solution**: 
+  - Add required environment variables in Netlify dashboard
+  - Ensure variables are prefixed with `NEXT_PUBLIC_` for client-side access
+  - Redeploy after adding variables
+
+#### Assets Not Loading
+
+- **Issue**: Images or CSS files return 404
+- **Solution**:
+  - Verify files are in `public` directory
+  - Check file paths are absolute (start with `/`)
+  - Clear Netlify cache and redeploy
+
+#### Redirect Issues
+
+- **Issue**: Routes return 404
+- **Solution**:
+  - Check `netlify.toml` redirects configuration
+  - Verify `trailingSlash: true` in next.config.ts
+  - Test locally with `npm run build` first
+
+#### Deploy Previews Not Working
+
+- **Issue**: Pull requests don't generate previews
+- **Solution**:
+  - Check GitHub app permissions
+  - Verify Netlify has access to repository
+  - Check deploy settings in Netlify dashboard
 
 ## Deployment Checklist
 
@@ -170,7 +288,7 @@ After deployment:
 ## Support
 
 For issues with deployment:
-- Check GitHub Actions logs
-- Review Next.js documentation
-- Consult GitHub Pages documentation
+- **GitHub Pages**: Check GitHub Actions logs and GitHub Pages documentation
+- **Netlify**: Check Netlify deploy logs and Netlify documentation
+- Review Next.js documentation for static export issues
 - Check repository Issues section
